@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高額当選売り場マップ - LOTO PREDICTOR PRO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #map {
+            height: 60vh;
+            width: 100%;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        .map-section {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .shop-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .shop-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .shop-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .shop-rank {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        .shop-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        .shop-info {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .back-nav {
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-glow"></div>
+    <div class="container map-container">
+        <div class="back-nav">
+            <a href="index.html" class="btn btn-secondary" style="display: inline-flex; width: auto; padding: 0.8rem 1.5rem;">
+                <span class="icon">←</span> TOPに戻る
+            </a>
+        </div>
+
+        <header>
+            <h1>LUCKY <span class="highlight">MAP</span></h1>
+            <p>全国の高額当選売り場マップ</p>
+        </header>
+
+        <section class="map-section">
+            <div id="map"></div>
+            
+            <h2>売り場リスト</h2>
+            <div id="shop-list" class="shop-list">
+                <!-- Shops will be injected here -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="map.js"></script>
+</body>
+</html>

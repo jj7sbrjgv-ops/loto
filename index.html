@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOTO PREDICTOR PRO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-glow"></div>
+    <main class="container">
+        <header>
+            <h1>LOTO PREDICTOR <span class="highlight">PRO</span></h1>
+            <p>統計データに基づく次世代の予測アルゴリズム</p>
+        </header>
+
+        <div class="controls">
+            <button id="btn-loto6" class="btn btn-primary" onclick="app.generateOrdered('loto6')">
+                <span class="icon">6</span> LOTO 6Generated
+            </button>
+            <button id="btn-loto7" class="btn btn-secondary" onclick="app.generateOrdered('loto7')">
+                <span class="icon">7</span> LOTO 7Generated
+            </button>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <a href="map.html" class="btn" style="display: inline-flex; width: auto; background: rgba(255,170,0,0.1); border-color: rgba(255,170,0,0.5); color: #ffaa00;">
+                <span class="icon">📍</span> 高額当選売り場MAP
+            </a>
+        </div>
+
+        <section id="results-area" class="results-grid">
+            <!-- Results will be injected here -->
+            <div class="placeholder-text">
+                予測を開始するにはボタンを押してください
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
