@@ -12,8 +12,10 @@
 <body>
     <!-- 背景の発光エフェクト -->
     <div class="background-glow"></div>
+    <!-- 予測生成のメインUI領域 -->
     <main class="container">
         <header>
+            <!-- サービス名とサブコピー -->
             <h1>LOTO PREDICTOR <span class="highlight">PRO</span></h1>
             <p>統計データに基づく次世代の予測アルゴリズム</p>
         </header>
@@ -38,12 +40,14 @@
         <!-- JSで生成した予測チケットを描画する領域 -->
         <section id="results-area" class="results-grid">
             <!-- Results will be injected here -->
+            <!-- 初期表示時は案内文を表示し、生成後にカードへ置き換える -->
             <div class="placeholder-text">
                 予測を開始するにはボタンを押してください
             </div>
         </section>
     </main>
 
+    <!-- 予測ロジックとDOM描画処理 -->
     <script src="script.js"></script>
 </body>
 </html>

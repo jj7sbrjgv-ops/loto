@@ -48,18 +48,18 @@ const SHOPS_CSV = `順位,売り場名,所在地,合計回数
 3位,坂フジグラン安芸チャンスセンター ,安芸郡坂町 ,3回
 3位,宗像ミスターマックスチャンスセンター ,福岡県宗像市 ,3回`;
 
-// Initial map center (Tokyo)
+// 初期表示はアクセスしやすい東京周辺を中心に設定
 const INITIAL_VIEW = [35.672925, 139.763192]; 
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // Initialize Map
+    // Leaflet地図を初期化し、ズーム10で表示開始
     const map = L.map('map').setView(INITIAL_VIEW, 10);
     
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Parse CSV
+    // CSV文字列を1行ずつ分解して、扱いやすいオブジェクト配列へ変換
     const rows = SHOPS_CSV.trim().split('\n').slice(1);
     const shops = rows.map(row => {
         const [rank, name, address, count] = row.split(',').map(s => s.trim());
@@ -68,19 +68,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const shopListEl = document.getElementById('shop-list');
     
-    // Process top 1 manually to be sure
+    // 1位店舗は必ず地図に出すため、既知座標(初期表示地点)で先に描画
     const topShop = shops[0];
     addMarker(map, INITIAL_VIEW[0], INITIAL_VIEW[1], topShop);
     createShopCard(topShop, INITIAL_VIEW[0], INITIAL_VIEW[1], map);
 
-    // Process others with delay to respect rate limits of free OSM API
-    // We only process first 10-15 to avoid overloading/waiting too long for demo
-    // The rest will just be in the list
+    // 無料APIのレート制限に配慮し、全件を一気にジオコーディングしない
+    // 先頭15件のみ座標取得して地図に出し、残りはリスト表示中心にする
     
     for (let i = 1; i < shops.length; i++) {
         const shop = shops[i];
         
-        // Add to list immediately
+        // 座標取得の成否に関わらず、リストには即時表示して閲覧性を確保
         const card = document.createElement('div');
         card.className = 'shop-card';
         card.innerHTML = `
@@ -93,7 +92,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         `;
         shopListEl.appendChild(card);
         
-        // Try to fetch coordinates for first 15 shops
+        // 先頭15件だけ地図表示対象として座標取得を試行
         if (i < 15) {
             try {
                 // 無料APIのレート制限回避のため間隔を空ける
@@ -102,13 +101,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (coords) {
                     addMarker(map, coords.lat, coords.lon, shop);
                     
-                    // Add click handler to list card
+                    // リスト項目クリックで地図を該当地点へ移動
                     card.onclick = () => {
                         map.flyTo([coords.lat, coords.lon], 16);
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                     };
                 }
             } catch (e) {
+                // 通信・API失敗時も画面全体は継続動作させる
                 console.warn(`Failed to geocode ${shop.name}:`, e);
             }
         }
@@ -128,6 +128,7 @@ function addMarker(map, lat, lng, shop) {
     return market;
 }
 
+// トップ店舗用カードを生成し、リスト先頭へ挿入する
 function createShopCard(shop, lat, lng, map) {
     const shopListEl = document.getElementById('shop-list');
     const card = document.createElement('div');
@@ -144,10 +145,11 @@ function createShopCard(shop, lat, lng, map) {
         map.flyTo([lat, lng], 16);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
-    // Prepend top shop
+    // 1位店舗が最初に見えるよう先頭へ追加
     shopListEl.insertBefore(card, shopListEl.firstChild);
 }
 
+// Nominatim APIで住所を座標へ変換する（店舗名付き検索 -> 住所のみ検索の順で実施）
 async function getCoordinates(address, name) {
     // まずは店舗名+住所で高精度検索
     let query = `${address} ${name}`;

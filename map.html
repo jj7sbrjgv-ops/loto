@@ -71,6 +71,7 @@
 <body>
     <!-- メイン画面と共通の背景エフェクト -->
     <div class="background-glow"></div>
+    <!-- 売り場地図ページの表示領域 -->
     <div class="container map-container">
         <!-- トップ画面へ戻るナビゲーション -->
         <div class="back-nav">
@@ -88,6 +89,7 @@
             <!-- Leafletが描画する地図キャンバス -->
             <div id="map"></div>
             
+            <!-- map.js がカードを動的生成して挿入するリスト -->
             <h2>売り場リスト</h2>
             <div id="shop-list" class="shop-list">
                 <!-- Shops will be injected here -->
@@ -97,6 +99,7 @@
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- 売り場データの変換、座標検索、マーカー/リスト連携処理 -->
     <script src="map.js"></script>
 </body>
 </html>

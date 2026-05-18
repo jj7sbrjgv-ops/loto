@@ -20,6 +20,7 @@
 }
 
 body {
+    /* 画面中央にコンテンツを配置し、背景演出を全面表示する土台 */
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: var(--font-body);
@@ -46,6 +47,7 @@ body {
 }
 
 .container {
+    /* 共通コンテナ: PCで横幅を抑え、スマホでは横余白を確保 */
     width: 90%;
     max-width: 800px;
     padding: 2rem;
@@ -53,6 +55,7 @@ body {
 }
 
 header {
+    /* 初回表示時にタイトルが上からフェードイン */
     margin-bottom: 3rem;
     animation: fadeInDown 0.8s ease-out;
 }
@@ -90,6 +93,7 @@ header p {
 }
 
 .btn {
+    /* 透明感のあるガラス風ボタン */
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--card-border);
     color: #fff;
@@ -154,6 +158,7 @@ header p {
 
 /* Card Styling */
 .ticket-card {
+    /* 予測1件分のカード。初期は透明で、アニメーションで表示 */
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-left: 4px solid var(--primary-color);
@@ -224,6 +229,7 @@ header p {
 }
 
 .meta-info {
+    /* 右端に合計値と連番インデックスを表示 */
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -299,6 +305,7 @@ header p {
 
 /* Mobile Responsive */
 @media (max-width: 600px) {
+    /* モバイルではカード内要素を縦積みにして視認性を確保 */
     .ticket-card {
         flex-direction: column;
         gap: 1rem;
