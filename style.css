@@ -1,4 +1,5 @@
 :root {
+    /* 全体テーマ用のカラートークンとフォント定義 */
     --bg-color: #0d0d12;
     --text-color: #ffffff;
     --primary-color: #00f2ff;
@@ -11,6 +12,7 @@
     --font-body: 'Zen Kaku Gothic New', sans-serif;
 }
 
+/* 初期化 */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -30,6 +32,7 @@ body {
 }
 
 .background-glow {
+    /* 背景に2色のぼかしグラデーションを重ねる */
     position: fixed;
     top: 0;
     left: 0;
@@ -78,6 +81,7 @@ header p {
 }
 
 .controls {
+    /* ボタン群は横並びで中央配置 */
     display: flex;
     justify-content: center;
     gap: 1.5rem;
@@ -133,6 +137,7 @@ header p {
 }
 
 .results-grid {
+    /* チケットを縦積み表示 */
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -176,6 +181,7 @@ header p {
 }
 
 .ball {
+    /* 数字ボールの立体感表現 */
     width: 40px;
     height: 40px;
     border-radius: 50%;

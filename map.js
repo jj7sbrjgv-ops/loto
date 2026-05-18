@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Try to fetch coordinates for first 15 shops
         if (i < 15) {
             try {
-                // Add jitter/delay
+                // 無料APIのレート制限回避のため間隔を空ける
                 await new Promise(r => setTimeout(r, 1200)); 
                 const coords = await getCoordinates(shop.address, shop.name);
                 if (coords) {
@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 function addMarker(map, lat, lng, shop) {
+    // 売り場情報をポップアップ付きで地図に追加
     const market = L.marker([lat, lng]).addTo(map);
     market.bindPopup(`
         <div style="color: #333; min-width: 200px;">
@@ -148,7 +149,7 @@ function createShopCard(shop, lat, lng, map) {
 }
 
 async function getCoordinates(address, name) {
-    // Try searching name + address first
+    // まずは店舗名+住所で高精度検索
     let query = `${address} ${name}`;
     let url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`;
     
@@ -157,8 +158,7 @@ async function getCoordinates(address, name) {
 
     if (data.length > 0) return { lat: data[0].lat, lon: data[0].lon };
 
-    // Fallback: search address only
-    // If address is broad (e.g. city), it will return city center
+    // 失敗時は住所のみで再検索（広域住所なら中心点になる）
     url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1`;
     res = await fetch(url);
     data = await res.json();

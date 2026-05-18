@@ -1,4 +1,5 @@
 const CONFIG = {
+    // LOTO 6 の生成条件
     loto6: {
         min: 1,
         max: 43,
@@ -8,6 +9,7 @@ const CONFIG = {
         sumMax: 140,
         evenOddRatios: [[3, 3], [4, 2], [2, 4]], // [even, odd]
     },
+    // LOTO 7 の生成条件
     loto7: {
         min: 1,
         max: 37,
@@ -39,6 +41,7 @@ const app = {
         let attempts = 0;
         const maxAttempts = 1000;
 
+        // 条件を満たすまで乱数生成を繰り返す
         while (attempts < maxAttempts) {
             attempts++;
             let numbers = this.generateRandomSet(config);
@@ -73,6 +76,7 @@ const app = {
         }
 
         const selection = new Set();
+        // 重み付きプールから重複なしで必要数を抽出
         while (selection.size < config.count) {
             const index = Math.floor(Math.random() * pool.length);
             const num = pool[index];
@@ -115,6 +119,7 @@ const app = {
             ball.className = 'ball';
             ball.textContent = num < 10 ? `0${num}` : num;
             
+            // 出現頻度が高い数字は強調表示
             if (config.frequent.includes(num)) {
                 ball.classList.add('frequent');
             }

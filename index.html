@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- 背景の発光エフェクト -->
     <div class="background-glow"></div>
     <main class="container">
         <header>
@@ -17,6 +18,7 @@
             <p>統計データに基づく次世代の予測アルゴリズム</p>
         </header>
 
+        <!-- くじ種別ごとの予測を実行する操作ボタン -->
         <div class="controls">
             <button id="btn-loto6" class="btn btn-primary" onclick="app.generateOrdered('loto6')">
                 <span class="icon">6</span> LOTO 6Generated
@@ -26,12 +28,14 @@
             </button>
         </div>
 
+        <!-- 売り場マップ画面への導線 -->
         <div style="text-align: center; margin-bottom: 2rem;">
             <a href="map.html" class="btn" style="display: inline-flex; width: auto; background: rgba(255,170,0,0.1); border-color: rgba(255,170,0,0.5); color: #ffaa00;">
                 <span class="icon">📍</span> 高額当選売り場MAP
             </a>
         </div>
 
+        <!-- JSで生成した予測チケットを描画する領域 -->
         <section id="results-area" class="results-grid">
             <!-- Results will be injected here -->
             <div class="placeholder-text">
